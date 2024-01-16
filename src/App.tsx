@@ -10,11 +10,12 @@ const App: React.FC = () => {
   const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [availableItems, setAvailableItems] = useState<string[]>(items);
+  const [isInputFocused, setIsInputFocused] = useState<boolean>(false); // New state
 
   useEffect(() => {
     /**
      * The function handleBackspace listens for the Backspace key press event and removes the last
-     * selected item if the input value is empty. 
+     * selected item if the input value is empty.
      * It contains information about the key that was pressed, such as the key code and key name.
      */
 
@@ -72,29 +73,45 @@ const App: React.FC = () => {
       setAvailableItems([...availableItems, removedItem]);
     }
   };
+  const handleInputFocus = () => {
+    setIsInputFocused(true);
+  };
+
+  const handleInputBlur = () => {
+    setIsInputFocused(false);
+    // avlItems.current =
+  };
 
   return (
     <div className='container mx-auto -mt-40 p-4 min-w-full'>
-      {/*Rendering a component called SelectedChips and passing two props to it: selectedItems and onRemoveChip. */}
-      <SelectedChips selectedItems={selectedItems} onRemoveChip={removeChip} />
+      {/* Rendering a list of selected items as chips. It takes two props: `selectedItems` and `onRemoveChip`. */}
+      <SelectedChips
+        selectedItems={selectedItems}
+        onRemoveChip={removeChip}
+      />
 
-      {/* Rendering an input field in the React component. Here's what each attribute is doing: */}
       <input
         ref={inputRef}
         type='text'
         value={inputValue}
         onChange={handleInputChange}
-        placeholder='Type here...'
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+        placeholder='Search here...'
         className='p-2 focus:border-yellow-500 border relative border-gray-300 min-w-[50vw] rounded focus:outline-none'
       />
 
-      {/* Rendering a list of available items. It takes in the following props: */}
-      <AvailableItemsList
-        availableItems={availableItems}
-        inputValue={inputValue}
-        onItemClick={handleItemClick}
-        highlightedIndex={highlightedIndex}
-      />
+      <div
+        className={`available-items-list transition-opacity transition-max-height ease-in-out duration-500`}
+      >
+        <AvailableItemsList
+          availableItems={availableItems}
+          inputValue={inputValue}
+          onItemClick={handleItemClick}
+          highlightedIndex={highlightedIndex}
+          isInputFocused={isInputFocused}
+        />
+      </div>
     </div>
   );
 };

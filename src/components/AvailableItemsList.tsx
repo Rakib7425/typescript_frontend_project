@@ -5,6 +5,7 @@ interface AvailableItemsListProps {
     inputValue: string;
     onItemClick: (item: string) => void;
     highlightedIndex: number | null;
+    isInputFocused: boolean;
 }
 
 const AvailableItemsList: React.FC<AvailableItemsListProps> = ({
@@ -12,8 +13,9 @@ const AvailableItemsList: React.FC<AvailableItemsListProps> = ({
     inputValue,
     onItemClick,
     highlightedIndex,
+    isInputFocused,
 }) => (
-    <ul className={`max-h-72 fixed w-[50vw] overflow-y-auto  border-gray-300 rounded mt-2 ${availableItems.length > 0 ? 'border' : ''}`}>
+    <ul className={`max-h-72 fixed w-[50vw] overflow-y-auto border-gray-300 rounded mt-2 ${availableItems.length > 0 ? 'border' : ''} ${isInputFocused ? "visible" : "opacity-0 invisible"}`}>
         {availableItems
             .filter((item) => item.toLowerCase().includes(inputValue.toLowerCase()))
             .map((item, index) => (
@@ -27,6 +29,7 @@ const AvailableItemsList: React.FC<AvailableItemsListProps> = ({
                 </li>
             ))}
     </ul>
+
 );
 
 export default AvailableItemsList;
