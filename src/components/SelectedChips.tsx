@@ -14,7 +14,7 @@ const SelectedChips: React.FC<SelectedChipsProps> = ({ selectedItems, onRemoveCh
             >
                 {item}
                 <span
-                    className='ml-3 text-red-700 font-bold focus:outline-none cursor-pointer'
+                    className='ml-3 text-red-700 hover:text-blue-800 duration-150 font-bold focus:outline-none cursor-pointer'
                     onClick={() => onRemoveChip(index)}
                 >
                     X

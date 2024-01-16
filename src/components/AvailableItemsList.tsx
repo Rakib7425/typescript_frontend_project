@@ -13,13 +13,13 @@ const AvailableItemsList: React.FC<AvailableItemsListProps> = ({
     onItemClick,
     highlightedIndex,
 }) => (
-    <ul className='max-h-72 fixed w-[50vw] overflow-y-auto border border-gray-300 rounded mt-2'>
+    <ul className={`max-h-72 fixed w-[50vw] overflow-y-auto  border-gray-300 rounded mt-2 ${availableItems.length > 0 ? 'border' : ''}`}>
         {availableItems
             .filter((item) => item.toLowerCase().includes(inputValue.toLowerCase()))
             .map((item, index) => (
                 <li
                     key={index}
-                    className={`p-2 cursor-pointer bg-gray-800 my-1 ${highlightedIndex === index ? "bg-gray-100" : ""
+                    className={`p-2 cursor-pointer bg-gray-800 hover:bg-gray-600 duration-200 my-1 ${highlightedIndex === index ? "bg-gray-100" : ""
                         }`}
                     onClick={() => onItemClick(item)}
                 >
