@@ -12,6 +12,12 @@ const App: React.FC = () => {
   const [availableItems, setAvailableItems] = useState<string[]>(items);
 
   useEffect(() => {
+    /**
+     * The function handleBackspace listens for the Backspace key press event and removes the last
+     * selected item if the input value is empty. 
+     * It contains information about the key that was pressed, such as the key code and key name.
+     */
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleBackspace = (event: any) => {
       if (event.key === "Backspace" && inputValue === "" && selectedItems.length > 0) {
@@ -69,8 +75,10 @@ const App: React.FC = () => {
 
   return (
     <div className='container mx-auto -mt-40 p-4 min-w-full'>
+      {/*Rendering a component called SelectedChips and passing two props to it: selectedItems and onRemoveChip. */}
       <SelectedChips selectedItems={selectedItems} onRemoveChip={removeChip} />
 
+      {/* Rendering an input field in the React component. Here's what each attribute is doing: */}
       <input
         ref={inputRef}
         type='text'
@@ -79,6 +87,8 @@ const App: React.FC = () => {
         placeholder='Type here...'
         className='p-2 focus:border-yellow-500 border relative border-gray-300 min-w-[50vw] rounded focus:outline-none'
       />
+
+      {/* Rendering a list of available items. It takes in the following props: */}
       <AvailableItemsList
         availableItems={availableItems}
         inputValue={inputValue}
