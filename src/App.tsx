@@ -1,12 +1,11 @@
-
-import React, { useState, useEffect, useRef } from 'react';
-import './App.css';
-import { items } from './items';
-import SelectedChips from './components/SelectedChips';
-import AvailableItemsList from './components/AvailableItemsList';
+import React, { useState, useEffect, useRef } from "react";
+import "./App.css";
+import { items } from "./items";
+import SelectedChips from "./components/SelectedChips";
+import AvailableItemsList from "./components/AvailableItemsList";
 
 const App: React.FC = () => {
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>("");
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -15,17 +14,17 @@ const App: React.FC = () => {
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleBackspace = (event: any) => {
-      if (event.key === 'Backspace' && inputValue === '' && selectedItems.length > 0) {
+      if (event.key === "Backspace" && inputValue === "" && selectedItems.length > 0) {
         event.preventDefault();
         setHighlightedIndex(selectedItems.length - 1);
         removeChip(selectedItems.length - 1);
       }
     };
 
-    document.addEventListener('keydown', handleBackspace);
+    document.addEventListener("keydown", handleBackspace);
 
     return () => {
-      document.removeEventListener('keydown', handleBackspace);
+      document.removeEventListener("keydown", handleBackspace);
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,12 +41,12 @@ const App: React.FC = () => {
   /**
    * Adds an item to the selected items list, removes it from the
    * available items list, and clears the input value.
-  */
+   */
   const handleItemClick = (item: string) => {
     if (!selectedItems.includes(item)) {
       setSelectedItems([...selectedItems, item]);
       setAvailableItems(availableItems.filter((availableItem) => availableItem !== item));
-      setInputValue('');
+      setInputValue("");
     }
   };
 
@@ -71,6 +70,7 @@ const App: React.FC = () => {
   return (
     <div className='container mx-auto -mt-40 p-4 min-w-full'>
       <SelectedChips selectedItems={selectedItems} onRemoveChip={removeChip} />
+
       <input
         ref={inputRef}
         type='text'

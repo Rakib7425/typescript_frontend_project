@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React from "react";
 
 interface SelectedChipsProps {
     selectedItems: string[];
@@ -7,7 +6,7 @@ interface SelectedChipsProps {
 }
 
 const SelectedChips: React.FC<SelectedChipsProps> = ({ selectedItems, onRemoveChip }) => (
-    <div className='flex flex-wrap gap-2 -mb-6 mt-1 z-10 max-w-[50%] absolute'>
+    <div className='flex flex-wrap gap-2 ml-1 -mb-6 mt-[5px] z-10 max-w-[50%] absolute'>
         {selectedItems.map((item, index) => (
             <div
                 key={item}
